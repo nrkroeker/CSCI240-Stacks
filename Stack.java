@@ -65,7 +65,7 @@ public class Stack<E> {
 
 	// Get the top element of the Stack
 	public E getTop() {
-		return stack[top]
+		return stack[top];
 	}
 
 	// Print the contents of the Stack
