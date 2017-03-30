@@ -4,3 +4,26 @@
 Nathalie Kroeker
 CSCI 24000
 Assignment 4 Algorithm
+
+Goal: Read a text file of student data and present it to the user
+
+Input:
+	- Menu options 1, 2, or 3
+	- Text file of student data
+Output:
+	- Student information in command line
+
+Requirements:
+	- Capacity to read in a file
+	- Stack to organize and print data
+
+Feedback:
+	- Menu mechanism with options for the user
+	- Check for input
+
+Step-by-Step Details:
+1. Presents menu with options to load students, print stack, or exit
+2. Load students reads the text file of info and pushes it onto the stack
+3. Print stack pops those students off the stack to print them
+4. Exit ends the program
+5. Recieves user input and performs selected action
