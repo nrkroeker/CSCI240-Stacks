@@ -6,13 +6,13 @@ public class Student {
 	private String lastName;
 	private Address address;
 	private String studentId;
-	private string gpa;
-	
+	private String gpa;
+
 	//Constructors
 	Student() {
-	
+
 	}
-	
+
 	Student(String firstNameIn, String lastNameIn, Address addressIn, String studentIdIn, String gpaIn) {
 		firstName = firstNameIn;
 		lastName = lastNameIn;
@@ -30,7 +30,7 @@ public class Student {
 		return lastName;
 	}
 
-	public String get Address() {
+	public Address getAddress() {
 		return address;
 	}
 
@@ -38,7 +38,7 @@ public class Student {
 		return studentId;
 	}
 
-	public getGpa() {
+	public String getGpa() {
 		return gpa;
 	}
 
