@@ -3,7 +3,6 @@ stacks:
 
 clean:
 	rm -f *.class
-	rm stacks
 
 run:
 	java Driver
