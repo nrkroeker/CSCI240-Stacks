@@ -1,11 +1,9 @@
-// Honor Pledge: I pledge that I have neither given nor received any help on this assignment
-
-stacks: Address.java Student.java Stack.java Driver.java
-	javac Address.java Student.java Stack.java Driver.java -o stacks
+stacks:
+	javac Address.java Student.java Stack.java Driver.java
 
 clean:
 	rm -f *.class
 	rm stacks
 
 run:
-	java stacks
+	java Driver
