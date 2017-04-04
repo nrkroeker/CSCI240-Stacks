@@ -5,37 +5,39 @@ import java.io.*;
 
 public class Driver {
 
+	public Stack<Student> stack = new Stack<Student>(10);
+
 	public static void main(String[] args) {
 		Driver driver = new Driver();
 		driver.menu();
 	}
 
 	public void menu() {
-		Stack<Student> fullStack = new Stack<Student>(10);
 		int menuInput = 0;
 
+		System.out.println("\nStacks upon Stacks\n\n");
+
 		while(menuInput != 3) {
-			System.out.println("\nStacks upon Stacks\n\n1. Load students from file \n2. Print stack \n3. Exit program \nEnter your selection: ");
+			System.out.println("1. Load students from file \n2. Print stack \n3. Exit program \nEnter your selection: ");
 			Scanner scan = new Scanner(System.in);
 			menuInput = scan.nextInt();
 
 			if (menuInput == 1) {
-				fullStack = readFile();
+				readFile();
 			} else if (menuInput == 2) {
-				printStack(fullStack);
+				printStack();
 			} else if (menuInput == 3) {
-				System.out.println("Now exiting...");
+				System.out.println("\nNow exiting...");
 			} else {
-				System.out.println("Please enter valid input");
+				System.out.println("\n\nPlease enter valid input\n\n");
 			}
 		}
 	}
 
-	public Stack readFile() {
+	public void readFile() {
 		String line = "";
 		String delims = "[,]";
 		String[] studentInfo;
-		Stack<Student> stack = new Stack<Student>(10);
 
 		try {
 			InputStream inputStream = new FileInputStream("students.txt");
@@ -43,18 +45,17 @@ public class Driver {
 			InputStreamReader reader = new InputStreamReader(inputStream);
 
 			BufferedReader buffer = new BufferedReader(reader);
-
+			buffer.readLine();
 			while(line != null) {
 					line = buffer.readLine();
-					studentInfo = line.split(delims);
+					if (line != null) {
+						studentInfo = line.split(delims);
 
-					Address address = new Address(studentInfo[2], studentInfo[3], studentInfo[4], studentInfo[5], studentInfo[6]);
+						Address address = new Address(studentInfo[2], studentInfo[3], studentInfo[4], studentInfo[5], studentInfo[6]);
 
-					Student student = new Student(studentInfo[0], studentInfo[1], address, studentInfo[7], studentInfo[8]);
-					if (student.getFirstName() != "FirstName") {
+						Student student = new Student(studentInfo[0], studentInfo[1], address, studentInfo[7], studentInfo[8]);
+
 						stack.push(student);
-					} else {
-						System.out.println("I'm skipping the first line of the file");
 					}
 				}
 				buffer.close();
@@ -63,25 +64,24 @@ public class Driver {
 			System.err.println(ex);
 			}
 
-			System.out.println("Students loaded from file!");
-
-		return stack;
+			System.out.println("\nStudents loaded from file!\n\n");
 	}
 
-	public void printStack(Stack stack) {
+	public void printStack() {
 		Student poppedStudent = new Student();
-		//
-		// while (poppedStudent != null) {
-		// 	String infoLine;
-		// 	poppedStudent = stack.pop();
-		// 	Address poppedAddress = poppedStudent.getAddress();
-		//
-		// 	infoLine = "ID: " + poppedStudent.getStudentId() + "          Name: " + poppedStudent.getFirstName() + " " + poppedStudent.getLastName() + "          Address: " + poppedAddress.getAddressLineOne() + " ";
-		// 	if(poppedAddress.getAddressLineTwo() != "") {
-		// 		infoLine += poppedAddress.getAddressLineTwo();
-		// 	}
-		// 	infoLine += " " + poppedAddress.getCity() + ", " + poppedAddress.getState() + " " + poppedAddress.getZipCode() + "          GPA: " + poppedStudent.getGpa();
-		// 	System.out.println(infoLine);
-		// }
+		System.out.println("\n");
+
+		while (!stack.isEmpty()) {
+			String infoLine;
+			poppedStudent = (Student)stack.pop();
+			Address poppedAddress = poppedStudent.getAddress();
+
+			infoLine = "ID: " + poppedStudent.getStudentId() + "\tName: " + poppedStudent.getFirstName() + " " + poppedStudent.getLastName() + "\tAddress: " + poppedAddress.getAddressLineOne() + " ";
+			if(poppedAddress.getAddressLineTwo() != "") {
+				infoLine += poppedAddress.getAddressLineTwo() + " ";
+			}
+			infoLine += poppedAddress.getCity() + ", " + poppedAddress.getState() + " " + poppedAddress.getZipCode() + "\tGPA: " + poppedStudent.getGpa();
+			System.out.println(infoLine);
+		}
 	}
 }
